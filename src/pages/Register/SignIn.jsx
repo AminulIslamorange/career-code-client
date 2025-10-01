@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext/authContext";
+import SocialLogin from "../shared/SocialLogin";
 
 
 const SignIn = () => {
@@ -39,8 +40,7 @@ const SignIn = () => {
                             <div><a className="link link-hover">Forgot password?</a></div>
                             <button className="btn btn-neutral mt-4">Login</button>
                         </form>
-                         {/* <div className="divider">OR</div>
-                         <div className="text-center mx-auto"> <SocialLogin ></SocialLogin></div> */}
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
