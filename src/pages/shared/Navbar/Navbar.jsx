@@ -41,7 +41,7 @@ const Navbar = () => {
       </ul>
     </div>
     <a className="btn btn-ghost text-xl">
-      <img src=''alt="" />
+      {/* <img src=''alt="" /> */}
       <h3 className='text-3xl'>HireHub</h3>
     </a>
   </div>

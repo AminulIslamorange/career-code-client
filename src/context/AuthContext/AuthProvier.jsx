@@ -34,13 +34,13 @@ const AuthProvier = ({ children }) => {
 
     useEffect(()=>{
 
-   const unsbubscibe=  onAuthStateChanged(auth,currentUser=>{
+   const unsubscibe=  onAuthStateChanged(auth,currentUser=>{
     setUser(currentUser)
     setLoading(false)
 
      })
      return ()=>{
-         unsbubscibe();
+         unsubscibe();
      }
 
     },[])
