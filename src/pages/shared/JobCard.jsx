@@ -1,7 +1,8 @@
 
 import { MdLocationPin } from "react-icons/md";
+import { Link } from "react-router-dom";
 const JobCard = ({job}) => {
-    const {title,location,jobType,applicationDeadline,salaryRange,company_logo,company,requirements}=job;
+    const {title,location,jobType,applicationDeadline,company_logo,company,requirements,description,salaryRange,_id}=job;
     return (
         <div className="card bg-base-100 w-96 shadow-sm">
             <div className="flex justify-between">
@@ -21,11 +22,17 @@ const JobCard = ({job}) => {
                     {title}
                     <div className="badge badge-secondary">NEW</div>
                 </h2>
-                <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-                <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                <p>Salary:  {salaryRange.min}-{salaryRange.max} {salaryRange.currency}</p>
+                <p>{description}</p>
+                <div className="card-actions">
+                    {
+                    requirements.map((skill,index)=><div className="badge badge-outline flex" key={index}>{skill}</div>)
+                    }
+                    
                 </div>
+                <div className="card-actions justify-end">
+     <Link to={`/jobs/${_id}`}> <button className="btn btn-primary">Show Details</button></Link>
+    </div>
             </div>
         </div>
     );
