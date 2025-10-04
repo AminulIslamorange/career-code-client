@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom"
-import { AuthContext } from "../../../context/AuthContext/authContext";
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
+
 
 
 const Navbar = () => {
@@ -10,7 +11,8 @@ const Navbar = () => {
       const navMenu=<>
     <li><NavLink to='/'>Home</NavLink></li>
     <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/'>Home</NavLink></li>
+    {user && <><li><NavLink to='/myapplication'>MY Application</NavLink></li>
+    </>}
     </>
 
 

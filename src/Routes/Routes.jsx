@@ -7,6 +7,7 @@ import SignIn from "../pages/Register/SignIn";
 import JobDetails from "../pages/JobDetails/JobDetails";
 import JobApply from "../pages/JobApply/JobApply";
 import PrivetRoutes from "./PrivetRoutes";
+import MyApplications from "../pages/MyApplications/MyApplications";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
           path:'/jobApply/:id',
           element:<PrivetRoutes><JobApply></JobApply></PrivetRoutes>,
           loader:({params})=>fetch(`http://localhost:5000/jobs/${params.id}`)
+        },
+        {
+          path:'/myapplication',
+          element:<PrivetRoutes><MyApplications></MyApplications></PrivetRoutes>
         }
     ]
   },
