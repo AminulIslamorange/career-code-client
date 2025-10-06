@@ -1,14 +1,28 @@
 
+import useAuth from "../../hooks/useAuth";
+
 
 const AddJob = () => {
+    const { user } = useAuth();
 
-    const handleAddAJOb=e=>{
+    const handleAddAJOb = e => {
         e.preventDefault();
-        const form=e.target;
-        const formData=new FormData(form)
+        const form = e.target;
+        const formData = new FormData(form)
+        // process salary Range data
+     const data = Object.fromEntries(formData.entries());
         
-        const data = Object.fromEntries(formData.entries());
-        console.log(data)
+        const { min, max, currency, ...newJob } = data;
+        newJob.salaryRange = { min, max, currency };
+        // process requirement data
+        const requirementsString=newJob.requirements;
+        const requirementProcess=requirementsString.split(',');
+        const requirementClean=requirementProcess.map(req=>req.trim());
+        newJob.requirements=requirementClean
+
+        // process responsibilities
+
+        newJob.responsibilities=newJob.responsibilities.split(',').map(res=>res.trim());
     }
     return (
         <div className="text-center justify-center mx-auto items-center">
@@ -36,9 +50,9 @@ const AddJob = () => {
                     <legend className="fieldset-legend">Page details</legend>
                     <div className="filter">
                         <input className="btn filter-reset" type="radio" name="jobType" aria-label="All" />
-                        <input className="btn" type="radio" name="jobType" aria-label="On-site" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Remote" />
-                        <input className="btn" type="radio" name="jobType" aria-label="Hybride" />
+                        <input className="btn" type="radio" name="jobType" aria-label="On-site" value="On_Site" />
+                        <input className="btn" type="radio" name="jobType" aria-label="Remote" value="Remote" />
+                        <input className="btn" type="radio" name="jobType" aria-label="Hybrid" value="Hybrid" />
                     </div>
 
                 </fieldset>
@@ -104,7 +118,7 @@ const AddJob = () => {
                     <input type="text" name="hr_name" className="input" placeholder="HR Name" />
 
                     <label className="label">HR Email</label>
-                    <input type="text" name="hr_email" className="input" placeholder="Hr Email" />
+                    <input type="text" name="hr_email" className="input" defaultValue={user.email} placeholder="Hr Email" />
 
                     <input type="submit" className="btn btn-primary" value="Add Job" />
                 </fieldset>
