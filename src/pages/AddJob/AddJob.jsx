@@ -1,5 +1,7 @@
 
+import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const AddJob = () => {
@@ -10,19 +12,34 @@ const AddJob = () => {
         const form = e.target;
         const formData = new FormData(form)
         // process salary Range data
-     const data = Object.fromEntries(formData.entries());
-        
+        const data = Object.fromEntries(formData.entries());
+
         const { min, max, currency, ...newJob } = data;
         newJob.salaryRange = { min, max, currency };
         // process requirement data
-        const requirementsString=newJob.requirements;
-        const requirementProcess=requirementsString.split(',');
-        const requirementClean=requirementProcess.map(req=>req.trim());
-        newJob.requirements=requirementClean
+        const requirementsString = newJob.requirements;
+        const requirementProcess = requirementsString.split(',');
+        const requirementClean = requirementProcess.map(req => req.trim());
+        newJob.requirements = requirementClean
 
         // process responsibilities
 
-        newJob.responsibilities=newJob.responsibilities.split(',').map(res=>res.trim());
+        newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
+
+        newJob.status = 'active'
+        axios.post('http://localhost:5000/jobs', newJob)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "New JOb added",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(error => console.error(error))
     }
     return (
         <div className="text-center justify-center mx-auto items-center">
@@ -71,7 +88,7 @@ const AddJob = () => {
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                     <legend className="fieldset-legend">ApplicationDeadline</legend>
 
-                    <input type="date" />
+                    <input type="date" name="deadline" />
                 </fieldset>
                 {/* Sallary Range */}
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">

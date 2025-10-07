@@ -13,10 +13,14 @@ const Navbar = () => {
     <li><NavLink to='/'>Home</NavLink></li>
     {user && <><li><NavLink to='/myapplication'>MY Application</NavLink></li>
     </>}
-     {user && <><li><NavLink to='/addJOb'>Add Job</NavLink></li>
-    </>}
-  </>
 
+     {user && <><li><NavLink to='/addJOb'>Add Job</NavLink></li>
+     <li><NavLink to='/myPostedJob'>My Posted Job</NavLink></li>
+     
+    </>
+     }
+ 
+</>
 
   const handleLogOut = () => {
     logOut()
